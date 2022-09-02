@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import AddTodo from 'components/AddTodo';
+
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-import Todos from 'components/Todos';
+import TodoCollection from 'components/TodoCollection';
 import { getTodos, createTodo, deleteTodo, patchTodo } from 'api/todos';
 import { useAuth } from 'contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
+import AddTodoInput from 'components/common/AddTodoInput';
 
 const TodoPage = () => {
   const { isAuthenticated } = useAuth();
@@ -13,8 +14,8 @@ const TodoPage = () => {
   const [todos, setTodos] = useState([]);
   const numOfTodos = todos.filter((todo) => !todo.isDone).length;
 
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
+  const handleChange = (targetValue) => {
+    setInputValue(targetValue);
   };
 
   const handleAddTodo = async () => {
@@ -88,6 +89,7 @@ const TodoPage = () => {
     try {
       const currentTodo = todos.find((t) => t.id === id);
 
+      console.log('id', id);
       setTodos((prevTodos) =>
         prevTodos.map((todo) => {
           if (todo.id !== id) {
@@ -170,17 +172,17 @@ const TodoPage = () => {
   return (
     <div>
       <Header />
-      <AddTodo
+      <AddTodoInput
         inputValue={inputValue}
-        handleChange={handleChange}
-        handleKeyPress={handleKeyPress}
-        handleAddTodo={handleAddTodo}
+        onChange={handleChange}
+        onKeyPress={handleKeyPress}
+        onAddTodo={handleAddTodo}
       />
-      <Todos
+      <TodoCollection
         todos={todos}
-        handleDelete={handleDelete}
-        handleSave={handleSave}
-        handleToggleIsDone={handleToggleIsDone}
+        onDelete={handleDelete}
+        onSave={handleSave}
+        onToggleIsDone={handleToggleIsDone}
         updateIsEdit={updateIsEdit}
       />
       <Footer numOfTodos={numOfTodos} />

@@ -2,9 +2,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Navigate, Link } from 'react-router-dom';
 import { ACLogoIcon } from 'images';
-import Input from 'components/common/Input';
+import Input from 'components/common/AuthInput';
 
 import { useAuth } from 'contexts/AuthContext';
+import AuthInput from 'components/common/AuthInput';
 
 const Container = styled.div`
   display: flex;
@@ -43,7 +44,7 @@ const StyledLinkText = styled.div`
   font-weight: 400;
 `;
 
-const Login = () => {
+const LoginPage = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const { login, isAuthenticated } = useAuth();
@@ -63,18 +64,20 @@ const Login = () => {
       </div>
       <h1 className="h3 mb-3 font-weight-normal">登入 Todo</h1>
       <InputContainer>
-        <Input
+        <AuthInput
+          label={'帳號'}
           title={'username'}
           value={userName}
-          placeholder={'帳號'}
+          placeholder={'請輸入帳號'}
           onChange={(nameInputValue) => setUserName(nameInputValue)}
         />
       </InputContainer>
       <InputContainer>
-        <Input
+        <AuthInput
+          label={'密碼'}
           type={'password'}
           value={password}
-          placeholder={'密碼'}
+          placeholder={'請輸入密碼'}
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </InputContainer>
@@ -86,4 +89,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Navigate, Link } from 'react-router-dom';
 import { ACLogoIcon } from 'images';
-import Input from 'components/common/Input';
+import Input from 'components/common/AuthInput';
 
 import { useAuth } from 'contexts/AuthContext';
 
@@ -67,24 +67,27 @@ const RegisterPage = () => {
       <InputContainer>
         <Input
           title={'username'}
+          label={'帳號'}
           value={userName}
-          placeholder={'帳號'}
+          placeholder={'請輸入帳號'}
           onChange={(nameInputValue) => setUserName(nameInputValue)}
         />
       </InputContainer>
       <InputContainer>
         <Input
+          label={'Email'}
           title={'email'}
           value={email}
-          placeholder={'email'}
+          placeholder={'請輸入email'}
           onChange={(emailInputValue) => setEmail(emailInputValue)}
         />
       </InputContainer>
       <InputContainer>
         <Input
           type={'password'}
+          label={'密碼'}
           value={password}
-          placeholder={'密碼'}
+          placeholder={'請輸入密碼'}
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </InputContainer>

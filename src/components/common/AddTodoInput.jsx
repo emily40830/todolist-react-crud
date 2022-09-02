@@ -1,11 +1,6 @@
 import clsx from 'clsx';
 
-const AddTodo = ({
-  inputValue,
-  handleChange,
-  handleKeyPress,
-  handleAddTodo,
-}) => (
+const AddTodoInput = ({ inputValue, onChange, onKeyPress, onAddTodo }) => (
   <div className={clsx('add-todo', { active: inputValue.length > 0 })}>
     <label className="add-todo-icon icon" htmlFor="add-todo-input"></label>
     <div className="add-todo-input">
@@ -13,13 +8,16 @@ const AddTodo = ({
         id="add-todo-input"
         type="text"
         placeholder="新增工作"
-        onChange={handleChange}
-        onKeyPress={handleKeyPress}
+        onChange={(e) => onChange && onChange(e.target.value)}
+        onKeyPress={(e) => onKeyPress && onKeyPress(e)}
         value={inputValue}
       />
     </div>
     <div className="add-todo-action">
-      <button className="btn-reset btn-add" onClick={handleAddTodo}>
+      <button
+        className="btn-reset btn-add"
+        onClick={() => onAddTodo && onAddTodo()}
+      >
         {' '}
         新增{' '}
       </button>
@@ -27,4 +25,4 @@ const AddTodo = ({
   </div>
 );
 
-export default AddTodo;
+export default AddTodoInput;

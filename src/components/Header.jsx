@@ -17,7 +17,6 @@ const StyledGreetingText = styled.span`
 
 const Header = () => {
   const { currentMember } = useAuth();
-  console.log('current user', currentMember);
   return (
     <StyledHeader>
       <h3>Tasks</h3>

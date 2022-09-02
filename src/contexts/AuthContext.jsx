@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { login, register, checkTokenExpired } from '../api/auth';
 
 const defaultAuthContext = {
-  isAuthenticating: true,
+  isAuthenticating: false,
   isAuthenticated: false,
   authToken: null,
   currentMember: null,
