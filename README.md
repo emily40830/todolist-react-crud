@@ -50,3 +50,8 @@ Input 的部分我們會將當前輸入的值帶入，也會需要監聽數值�
 - TodoCollection：將 todos data 透過 map render 出每筆 TodoItem
 - TodoPage: 引入所有檔案後組裝
 這時候 我們的 todo page 已經有完整的架構了
+
+6. feat: implement header and footer
+
+接下來，我們要來實作 header 與 footer，我們先安裝 styled-component 以及 node-sass 這個 package 
+為 header 與 footer 加上樣式與細節
