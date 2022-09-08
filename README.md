@@ -27,3 +27,8 @@
 * Tips1: 多一個 homepage 作為 網頁 loadable 的判斷
 * Tips2: 一個 folder 內建議都有一個 index 稱為目錄索引
 * Tips3: 可額外示範 pages 底下只有 page folder 的做法
+
+
+4. styles: add global styles
+
+設定專案全局的 css 樣式 在 app.css

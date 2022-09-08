@@ -1,3 +1,20 @@
-.App {
+:root {
+  --major: #ff6600;
+  --gray: #767678;
+}
+
+html,
+body {
+  background-color: #f4f4f4;
+  font-family: 'Lato', 'Noto Sans TC', sans-serif;
+}
+
+.app {
   text-align: center;
+  margin: 45px auto;
+  max-width: 600px;
+  min-width: 320px;
+  width: 100%;
+  background-color: white;
+  padding: 12px 16px;
 }

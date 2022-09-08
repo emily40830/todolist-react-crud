@@ -4,8 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <div>React TodoList</div>
+    <div className="app">
       <BrowserRouter>
         <Routes>
           <Route path="todos" element={<TodoPage />} />
