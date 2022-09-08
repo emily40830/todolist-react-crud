@@ -32,3 +32,21 @@
 4. styles: add global styles
 
 設定專案全局的 css 樣式 在 app.css
+
+5. feat: add components for todo page
+
+一切與 api 相關的操作放在 page 
+為了要讓 page 知道要刪減更新哪些元件
+必須要監聽子元件的各種 event
+
+依照設計稿，可以看出 todo page 的結構包含 上方一個 header, footer, 一個 輸入框還有 todo 列表
+我們先就目前的結構新增元件
+接著，我們來思考這些元件會需要哪些 props，這時候保持一個觀念，在設計這些元件時必須賦予其複用性
+例如以 header 來說，我希望這個元件保有它的樣式，但標題與右方的名字是可以隨著資料的代換做調整
+因此我將 username 的部分由 props 帶入; 
+footer 的部分會列出 目前有多少筆 todo item 因此也將這個數值定成 props
+Input 的部分我們會將當前輸入的值帶入，也會需要監聽數值的變化(onChange)，以及鍵盤的事件(onKeyPress)，還有新增 todo (onAddTodo)
+接下來我們將這些元件放到 page 做組裝
+- TodoCollection：將 todos data 透過 map render 出每筆 TodoItem
+- TodoPage: 引入所有檔案後組裝
+這時候 我們的 todo page 已經有完整的架構了
