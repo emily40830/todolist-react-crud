@@ -221,7 +221,9 @@ npm install json-server
     因此，在這邊我們在 todo page 新增 useEffect 來獲得資料，並更新 todo 狀態
 
 16. feat: add create todo from api
-
-17. feat: add create todo from api
+    透過 api 新增 todo ，可以從 後端拿到 todo 的 id，就可以把當前的 math.random 拿掉
+    這邊我們修改了 setTodos 的方法，改成 傳入 callback function 的方法，以確保當下依賴的 prev state 是正確的
+    (demo 新增，並觀察 json-server console)
+17. feat: add update todo from api
 
 18. feat: delete todo from api
