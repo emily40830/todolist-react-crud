@@ -82,6 +82,10 @@ const TodoPage = () => {
     });
   };
 
+  const handleDelete = (id) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <div>
       <Header username={'admin'} />
@@ -96,8 +100,9 @@ const TodoPage = () => {
         onToggleDone={handleToggleTodoItem}
         onChangeMode={handleChangeMode}
         onSave={handleSave}
+        onDelete={handleDelete}
       />
-      <Footer numOfTodos={0} />
+      <Footer numOfTodos={todos.length} />
     </div>
   );
 };
