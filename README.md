@@ -259,3 +259,11 @@ TodoItem.jsx
 Username: iamuser1
 Email: admin@alpha.co
 Password: pass1234
+
+20. feat: implement login page and signup page
+    現在我們來切登入與註冊頁，這兩個頁面的結構是一模一樣的，只有註冊頁多了一個註冊的 input 欄位
+    因此我們可以把兩個頁面共用的元件都拆到 common 的 folder 過去
+    這邊新增一個 auth.styled.js 將所有樣式元素都放過來，之後在 page 引用
+
+    由設計稿可以看出來 input 欄位也有做額外的設計，我們在這邊把 input 額外拆出一個 component，在這個 component 封裝樣式與開放可供存取的 event
+    頁面的佈局就到這邊完成，接下來會來實作 authinput 的部分
