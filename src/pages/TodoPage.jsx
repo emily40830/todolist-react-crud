@@ -31,7 +31,17 @@ const TodoPage = () => {
     if (inputValue.length === 0) {
       return;
     }
+    setTodos([
+      ...todos,
+      { id: Math.random() * 100, title: inputValue, isDone: false },
+    ]);
+    setInputValue('');
+  };
 
+  const handleKeyPress = () => {
+    if (inputValue.length === 0) {
+      return;
+    }
     setTodos([
       ...todos,
       { id: Math.random() * 100, title: inputValue, isDone: false },
@@ -46,6 +56,7 @@ const TodoPage = () => {
         inputValue={inputValue}
         onChange={handleChange}
         onAddTodo={handleAddTodo}
+        onKeyPress={handleKeyPress}
       />
       <TodoCollection todos={todos} />
       <Footer numOfTodos={0} />

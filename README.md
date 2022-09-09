@@ -89,6 +89,22 @@ Input 的部分我們會將當前輸入的值帶入，也會需要監聽數值�
 (到串 api 的 part 要記得 改成 帶入 callback function)
 
 10. feat: implement keypress for add todo
+眼尖的同學應該會發現，我們的 todoinput 還有一個 props 沒有用到，也就是 onKeyPress
+由於我們只需要在點擊鍵盤的特定紐時才觸發行為，因此我們在 input 這層就可以決定何時要執行 父層帶給我們的 callback function
+這邊我們只需要監聽 Enter 點擊時，再去執行 onKeyPress
+```
+<input
+    id="add-todo-input"
+    type="text"
+    ...
+    onKeyPress={(e) => {
+        if (e.key === 'Enter') {
+            onKeyPress?.();
+        }
+    }}
+    />
+```
+在 page 層，我們新增一 function handleKeyPress ，這邊做的事情與 handleAddTodo 相同
 
 
 11. feat: implement update todo
