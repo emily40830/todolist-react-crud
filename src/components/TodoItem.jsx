@@ -5,6 +5,7 @@ import {
   CheckHoverIcon,
 } from 'assets/images';
 import clsx from 'clsx';
+import { useRef, useEffect } from 'react';
 
 const StyledTaskItem = styled.div`
   min-height: 52px;
@@ -91,6 +92,26 @@ const StyledTaskItem = styled.div`
 `;
 
 const TodoItem = ({ todo, onSave, onDelete, onToggleDone, onChangeMode }) => {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (todo.isEdit && inputRef?.current) {
+      inputRef.current.focus();
+    }
+  }, [todo.isEdit]);
+
+  const handleKeyDown = (event) => {
+    // keyCode 13 一定是 enter，但 enter 的 keyCode 不一定是 13
+    if (inputRef?.current.value.length !== 0 && event.key === 13) {
+      onSave?.({ id: todo.id, title: inputRef.current.value });
+    }
+
+    // keyCode 13 一定是 enter，但 enter 的 keyCode 不一定是 13
+    if (event.keyCode === 27) {
+      onChangeMode?.({ id: todo.id, isEdit: false });
+    }
+  };
+
   return (
     <StyledTaskItem
       className={clsx('task-item', { done: todo.isDone, edit: todo.isEdit })}
@@ -110,7 +131,12 @@ const TodoItem = ({ todo, onSave, onDelete, onToggleDone, onChangeMode }) => {
         }}
       >
         <span className="task-item-body-text">{todo.title}</span>
-        <input className="task-item-body-input" value={todo.title} />
+        <input
+          ref={inputRef}
+          className="task-item-body-input"
+          defaultValue={todo.title}
+          onKeyDown={handleKeyDown}
+        />
       </div>
       <div className="task-item-action icon">
         <button className="btn-reset btn-destroy"></button>

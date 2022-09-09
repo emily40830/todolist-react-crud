@@ -137,3 +137,44 @@ Input 的部分我們會將當前輸入的值帶入，也會需要監聽數值�
 
 1. 在這邊我們為 todo 新增一個 isEdit 的 property 來代表它是否為編輯模式，並且透過 double click 切換此狀態，這邊的邏輯跟 toggleDone 相同
 2. 接著我們來為 editor mode 的 item 加上相應的 ui ，我們新增一個輸入框，讓他在切換成 editor mode 的時候出現，並將原本的文字隱藏，也將刪除按鈕隱藏
+
+---
+
+13. feat: implement update todo title at todo item
+
+由規格中我們可以知道，在編輯模式的過程我們需要知道當前編輯的內容為何，這個時候我們可以使用 useRef 這個 hook
+這個 hook 的使用如下
+
+```
+  const inputRef = useRef(null);
+
+ <input
+          ref={inputRef}
+          className="task-item-body-input"
+          defaultValue={todo.title}
+        />
+
+```
+
+這樣就可以 透過 inputRef.value 來獲取 input 當前的值為何
+目前為止，我們可以知道， item 會有 從父層 props 傳進來的初始值，以及保留在內部隨著使用者輸入的 input 值
+確保可以獲得兩個值後，我們就可以針對使用者後續的操作來決定是否要更新內容，還是保留原本的狀態即可
+
+- 點擊 enter: 更新 todo item 內容為 inputRef.current.value
+- 點擊 esc: 跳出編輯模式，回到 item 原始的狀態
+
+注意這邊我們在設定 input value 時，要用 defaultValue 這個 props 來指定初始狀態，否則編輯的時候，由於 value 已經被固定住，則會出現無法輸入的狀況
+(demo)
+到這邊我們可以發現，在 double click 後可以出現輸入框，但這時點擊鍵盤卻不會觸發任何事件，為什麼會這樣呢？
+因為輸入框出現後，我們必須將焦點轉向它，才有辦法透過它 監聽到鍵盤點擊的事件
+
+我們這裡透過 todo.isEdit 為 true 時，自動 focus 到輸入框吧！
+
+```
+ useEffect(() => {
+    if (todo.isEdit && inputRef?.current) {
+      inputRef.current.focus();
+    }
+  }, [todo.isEdit]);
+
+```
