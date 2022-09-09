@@ -4,13 +4,17 @@ const TodoCollection = ({
   todos,
   onDelete,
   onSave,
-  onToggleIsDone,
+  onToggleDone,
   onChangeMode,
 }) => {
   return (
     <div>
       {todos.map((todo) => (
-        <TodoItem todo={todo} key={todo.id} />
+        <TodoItem
+          todo={todo}
+          key={todo.id}
+          onToggleDone={(id) => onToggleDone?.(id)}
+        />
       ))}
     </div>
   );
