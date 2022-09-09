@@ -189,3 +189,27 @@ Input 的部分我們會將當前輸入的值帶入，也會需要監聽數值�
 
 15. feat: implement delete
     (學生自己做)
+
+16. feat: add json server
+    目前為止，我們已經完成 todolist 的所有功能，接下來串接要來實際模擬與後端拿取資料的更新操作
+    這次我們會使用到 json server 來當成我們的 後端伺服器
+
+- 將資料建立在 db.json 中
+- 使用 json-server --watch db.json --port 3001 來啟動 API (將指令加在 package.json)
+
+1. 安裝 json server
+
+```
+npm install json-server
+```
+
+2. 建立 json db
+   在專案根目錄建立 db.json，並帶入預期的資料格式
+3. Restful API 自動建立
+   GET /todos
+   GET /todos/1
+   POST /todos
+   PUT /todos/1
+   PATCH /todos/1
+   DELETE /todos/1
+4. 開一個新的 terminal 執行 npm run dev-server
