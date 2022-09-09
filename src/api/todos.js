@@ -46,3 +46,11 @@ export const patchTodo = async (payload) => {
     console.error('[Patch Todo failed]:', error);
   }
 };
+
+export const deleteTodo = async (id) => {
+  const res = await fetch(`${baseURL}/todos/${id}`, {
+    method: 'DELETE',
+  });
+
+  return res.json();
+};
