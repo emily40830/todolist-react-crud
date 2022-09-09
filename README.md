@@ -243,3 +243,19 @@ TodoItem.jsx
 ```
 
 18. feat: delete todo from api
+    delete 的做法與 update 大同小異
+
+(完成後測試完整功能)
+
+---
+
+19. feat: add auth api
+    接下來我們要來實作 登入與註冊的功能
+    這次請同學皆以這組帳號 密碼實驗登入與註冊功能
+    登入成功會回傳一組 JWT token
+    並成功進入 todo 頁面
+    Admin (JWT expiry: 1800s)
+
+Username: iamuser1
+Email: admin@alpha.co
+Password: pass1234
