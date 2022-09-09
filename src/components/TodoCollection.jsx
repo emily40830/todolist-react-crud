@@ -8,12 +8,11 @@ const TodoCollection = ({
   onChangeMode,
 }) => {
   return (
-    <>
-      <div>TodoCollection</div>
+    <div>
       {todos.map((todo) => (
-        <TodoItem todo={todo} />
+        <TodoItem todo={todo} key={todo.id} />
       ))}
-    </>
+    </div>
   );
 };
 

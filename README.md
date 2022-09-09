@@ -55,3 +55,26 @@ Input 的部分我們會將當前輸入的值帶入，也會需要監聽數值�
 
 接下來，我們要來實作 header 與 footer，我們先安裝 styled-component 以及 node-sass 這個 package 
 為 header 與 footer 加上樣式與細節
+
+7. feat: render dummy todo items
+
+現在我們先產一批假資料，讓 collection 是有內容的
+我們的 todo 資料包含三個欄位：id, title, 以及 是否完成
+我們將資料帶入，注意在渲染列表的時候，為了讓瀏覽器可以正確識別每個 todoItem 是不同的元件
+會額外帶入 key 的值，在這邊 key 我們可以用 todo.id 來呈現
+
+8. styles: todo items
+現在畫面上看到的 todo item 跟其他文字都融合再一起了
+我們先來上樣式
+(設定一個 styled component wrapper，裡面的樣式斟酌說明)
+這邊我們也順便將會用到的素材放到 assets/images ， 再使用 index.js 輸出
+這邊可以讓我們在 todoitem 引入圖片的時候，不會隨著引用的圖片越多，讓上面的 import statement 有很多行
+
+並且也將 toggle done 顯示出來
+這邊我們會用到 clsx 這個套件，可以根據 目前資料的狀態顯示不同的 class name
+我們這邊先帶入 isDone 顯示 todo 完成的樣子
+
+9. feat: implement add todo
+
+10. feat: implement update todo
+
