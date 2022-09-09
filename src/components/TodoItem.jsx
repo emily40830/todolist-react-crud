@@ -102,7 +102,7 @@ const TodoItem = ({ todo, onSave, onDelete, onToggleDone, onChangeMode }) => {
 
   const handleKeyDown = (event) => {
     // keyCode 13 一定是 enter，但 enter 的 keyCode 不一定是 13
-    if (inputRef?.current.value.length !== 0 && event.key === 13) {
+    if (inputRef?.current.value.length !== 0 && event.keyCode === 13) {
       onSave?.({ id: todo.id, title: inputRef.current.value });
     }
 

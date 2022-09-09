@@ -71,6 +71,17 @@ const TodoPage = () => {
     });
   };
 
+  const handleSave = ({ id, title }) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, title, isEdit: false };
+        }
+        return todo;
+      });
+    });
+  };
+
   return (
     <div>
       <Header username={'admin'} />
@@ -84,6 +95,7 @@ const TodoPage = () => {
         todos={todos}
         onToggleDone={handleToggleTodoItem}
         onChangeMode={handleChangeMode}
+        onSave={handleSave}
       />
       <Footer numOfTodos={0} />
     </div>
