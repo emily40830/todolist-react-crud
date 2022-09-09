@@ -226,4 +226,20 @@ npm install json-server
     (demo 新增，並觀察 json-server console)
 17. feat: add update todo from api
 
+在這裡會更動兩個 handler ，更動的時候，我們實際上是回傳一個 function 出去，因此在子元件要修改成底下的寫法，才會觸發到是正確的 handler
+
+TodoPage.jsx
+
+```
+  const handleToggleTodoItem = (id) => async () => { ... }
+```
+
+TodoItem.jsx
+
+```
+      <div className="task-item-checked">
+        <span className="icon icon-checked" onClick={onToggleDone?.(todo.id)} />
+      </div>
+```
+
 18. feat: delete todo from api

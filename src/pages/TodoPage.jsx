@@ -1,7 +1,7 @@
 import { Footer, Header, TodoCollection, TodoInput } from 'components';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getTodos, createTodo } from 'api/todos';
+import { getTodos, createTodo, patchTodo } from 'api/todos';
 
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
@@ -30,26 +30,45 @@ const TodoPage = () => {
     }
   };
 
-  const handleKeyPress = () => {
+  const handleKeyPress = async () => {
     if (inputValue.length === 0) {
       return;
     }
-    setTodos([
-      ...todos,
-      { id: Math.random() * 100, title: inputValue, isDone: false },
-    ]);
-    setInputValue('');
+
+    try {
+      const data = await createTodo({
+        title: inputValue,
+        isDone: false,
+      });
+      setTodos((prevTodos) => {
+        return [...prevTodos, { ...data, isDone: false }];
+      });
+      setInputValue('');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleToggleTodoItem = (id) => {
-    setTodos((prevTodos) => {
-      return prevTodos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, isDone: !todo.isDone };
-        }
-        return todo;
+  const handleToggleTodoItem = (id) => async () => {
+    const currentTodo = todos.find((todo) => todo.id === id);
+
+    try {
+      await patchTodo({
+        id,
+        isDone: !currentTodo.isDone,
       });
-    });
+
+      setTodos((prevTodos) => {
+        return prevTodos.map((todo) => {
+          if (todo.id === id) {
+            return { ...todo, isDone: !todo.isDone };
+          }
+          return todo;
+        });
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleChangeMode = ({ id, isEdit }) => {
@@ -63,15 +82,23 @@ const TodoPage = () => {
     });
   };
 
-  const handleSave = ({ id, title }) => {
-    setTodos((prevTodos) => {
-      return prevTodos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, title, isEdit: false };
-        }
-        return todo;
+  const handleSave = async ({ id, title }) => {
+    try {
+      await patchTodo({
+        id,
+        title,
       });
-    });
+      setTodos((prevTodos) => {
+        return prevTodos.map((todo) => {
+          if (todo.id === id) {
+            return { ...todo, title, isEdit: false };
+          }
+          return todo;
+        });
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleDelete = (id) => {

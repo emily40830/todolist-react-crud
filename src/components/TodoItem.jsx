@@ -117,12 +117,7 @@ const TodoItem = ({ todo, onSave, onDelete, onToggleDone, onChangeMode }) => {
       className={clsx('task-item', { done: todo.isDone, edit: todo.isEdit })}
     >
       <div className="task-item-checked">
-        <span
-          className="icon icon-checked"
-          onClick={() => {
-            onToggleDone?.(todo.id);
-          }}
-        />
+        <span className="icon icon-checked" onClick={onToggleDone?.(todo.id)} />
       </div>
       <div
         className="task-item-body"
