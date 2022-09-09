@@ -275,3 +275,19 @@ Password: pass1234
 login 會新增兩個 state :username and password 做存取
 signup 會新增三個 state :username email, and password 做存取
 同時也透過 onChange 來 setState
+
+22. feat: add auth context
+    在先前 todo crud 的實作中，我們可以發現使用 useState 管理元件內部的狀態時，為了讓子元件可以讀取到父層的狀態值，會透過 props 傳遞。
+
+當我們的專案結構越來越具規模時，這樣的傳遞方式會讓元件的 props 控管越顯複雜，這個時候，useContext 可以有效解決這樣的問題，可以透過 context provider 提供 global state 讓子元件
+我們會將登入狀態放在 context, 因為我們會需要判斷使用者是否是登入狀態來決定渲染的頁面
+
+1. createConext：定義集中管理的狀態（預設值）
+2. 使用 provider 管理登入後的狀態，並封裝登入與註冊的方法到 context 中作取用
+3. useContext：訂閱並取用 context 中的狀態，是取得資料的人（Consumer）
+
+首先來安裝套件 jsonwebtoken，用於解析我們登入後拿到的 token
+context 內部封裝了登入狀態，以及 登入 / 登出 / 註冊的方法
+登入 與 註冊 成功後 會拿到 authToken，我們將這個 token 放到 localStorage
+再透過 localStorage 中的 authToken 作為 dependency
+進而觸發更改 isAuthenticated
