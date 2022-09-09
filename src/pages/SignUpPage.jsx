@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   AuthContainer,
   AuthInputContainer,
@@ -8,7 +9,11 @@ import { ACLogoIcon } from 'assets/images';
 import AuthInput from 'components/AuthInput';
 import { Link } from 'react-router-dom';
 
-const LoginPage = () => {
+const SignUpPage = () => {
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <AuthContainer>
       <div className="mt-5">
@@ -16,18 +21,34 @@ const LoginPage = () => {
       </div>
       <h1 className="h3 mb-3 font-weight-normal">建立您的帳號</h1>
 
-      {'帳號'}
       <AuthInputContainer>
-        <AuthInput />
-      </AuthInputContainer>
-      {'email'}
-      <AuthInputContainer>
-        <AuthInput />
+        <AuthInput
+          title={'username'}
+          label={'帳號'}
+          value={userName}
+          placeholder={'請輸入帳號'}
+          onChange={(nameInputValue) => setUserName(nameInputValue)}
+        />
       </AuthInputContainer>
 
-      {'密碼'}
       <AuthInputContainer>
-        <AuthInput />
+        <AuthInput
+          label={'Email'}
+          title={'email'}
+          value={email}
+          placeholder={'請輸入email'}
+          onChange={(emailInputValue) => setEmail(emailInputValue)}
+        />
+      </AuthInputContainer>
+
+      <AuthInputContainer>
+        <AuthInput
+          type={'password'}
+          label={'密碼'}
+          value={password}
+          placeholder={'請輸入密碼'}
+          onChange={(passwordInputValue) => setPassword(passwordInputValue)}
+        />
       </AuthInputContainer>
       <AuthButton>註冊</AuthButton>
       <Link to="/login">
@@ -37,4 +58,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;

@@ -266,4 +266,12 @@ Password: pass1234
     這邊新增一個 auth.styled.js 將所有樣式元素都放過來，之後在 page 引用
 
     由設計稿可以看出來 input 欄位也有做額外的設計，我們在這邊把 input 額外拆出一個 component，在這個 component 封裝樣式與開放可供存取的 event
+    這邊會用到 react router dom 的 Link element 來實作連結
     頁面的佈局就到這邊完成，接下來會來實作 authinput 的部分
+
+21. feat: implement auth input and page state
+
+這邊我們將 auth input 的樣式處理好後，也為 兩頁 page 加上對應的 props
+login 會新增兩個 state :username and password 做存取
+signup 會新增三個 state :username email, and password 做存取
+同時也透過 onChange 來 setState
