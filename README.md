@@ -75,6 +75,21 @@ Input 的部分我們會將當前輸入的值帶入，也會需要監聽數值�
 我們這邊先帶入 isDone 顯示 todo 完成的樣子
 
 9. feat: implement add todo
+基本的樣式我們完成後，現在要來實作新增 todo 的功能
+我們先為 todo input 加上樣式，這邊我們先將新增按鈕隱藏，讓輸入框有值的時候，再讓它顯示
+(show `StyledAddTodoActionContainer` 這段)
 
-10. feat: implement update todo
+這邊我們會來帶大家看看，add to do input 與 todopage 的關係
+(上投影片)
+- 首先，todopage 會有一個 state 儲存當前輸入的值，同時我們將這個值帶給 Input
+- 當使用者輸入文字時，會觸發 input 的 onChange 事件，因此我們也將這個 event 觸發時，要做的事定義好，在 page 命名為 handleInputChange
+- 當我們確定輸入框有值時，就可以顯示 新增的 button ，同樣地我們使用 clsx 這個套件，用 inputValue 來決定是否要加上 active 這個 className
+- 接下來輸入完代辦後，我們要將輸入的值儲存，這邊透過 button onClick 事件來觸發儲存的行為，在 page 層新增一個 handleAddTodo
+- 這邊同樣透過 state 儲存 todos ，並帶入 collection ，在 handleAddTodo 中去更新 todos，這邊 id 的部分我們先給 一個 random number
+(到串 api 的 part 要記得 改成 帶入 callback function)
+
+10. feat: implement keypress for add todo
+
+
+11. feat: implement update todo
 
