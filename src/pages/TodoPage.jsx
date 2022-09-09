@@ -1,27 +1,11 @@
 import { Footer, Header, TodoCollection, TodoInput } from 'components';
 import { useState } from 'react';
-
-const dummyTodos = [
-  {
-    id: 1,
-    title: 'Learn React',
-    isDone: true,
-  },
-  {
-    id: 2,
-    title: 'Learn React Router',
-    isDone: false,
-  },
-  {
-    id: 3,
-    title: 'Learn React Hook',
-    isDone: true,
-  },
-];
+import { useEffect } from 'react';
+import { getTodos } from 'api/todos';
 
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
-  const [todos, setTodos] = useState(dummyTodos);
+  const [todos, setTodos] = useState([]);
 
   const handleChange = (value) => {
     setInputValue(value);
@@ -85,6 +69,14 @@ const TodoPage = () => {
   const handleDelete = (id) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
+
+  useEffect(() => {
+    getTodos()
+      .then((todos) => {
+        setTodos(todos.map((todo) => ({ ...todo, isEdit: false })));
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div>

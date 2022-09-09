@@ -213,3 +213,15 @@ npm install json-server
    PATCH /todos/1
    DELETE /todos/1
 4. 開一個新的 terminal 執行 npm run dev-server
+
+---
+
+15. feat: add get todos from api
+    要實作的功能有底下四個，可以先想像一下，當畫面 render 出 todo list 的時候，應該是要發起請求向後端拿取資料
+    因此，在這邊我們在 todo page 新增 useEffect 來獲得資料，並更新 todo 狀態
+
+16. feat: add create todo from api
+
+17. feat: add create todo from api
+
+18. feat: delete todo from api
