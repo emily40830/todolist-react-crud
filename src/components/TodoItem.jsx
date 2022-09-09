@@ -17,6 +17,10 @@ const StyledTaskItem = styled.div`
   box-shadow: 0 17px 0 -16px #e5e5e5;
   flex-wrap: wrap;
 
+  .task-item-body-input {
+    display: none;
+  }
+
   &:hover {
     background: #fff3eb;
     box-shadow: inset 0 0 0 1px #fff3eb;
@@ -34,6 +38,18 @@ const StyledTaskItem = styled.div`
 
     .icon-checked {
       background-image: url(${CheckActiveIcon});
+    }
+  }
+
+  &.edit {
+    .task-item-body-input {
+      display: block;
+    }
+    .task-item-body-text {
+      display: none;
+    }
+    .task-item-action {
+      display: none;
     }
   }
 
@@ -76,7 +92,9 @@ const StyledTaskItem = styled.div`
 
 const TodoItem = ({ todo, onSave, onDelete, onToggleDone, onChangeMode }) => {
   return (
-    <StyledTaskItem className={clsx('task-item', { done: todo.isDone })}>
+    <StyledTaskItem
+      className={clsx('task-item', { done: todo.isDone, edit: todo.isEdit })}
+    >
       <div className="task-item-checked">
         <span
           className="icon icon-checked"
@@ -85,8 +103,14 @@ const TodoItem = ({ todo, onSave, onDelete, onToggleDone, onChangeMode }) => {
           }}
         />
       </div>
-      <div className="task-item-body">
+      <div
+        className="task-item-body"
+        onDoubleClick={() => {
+          onChangeMode?.({ id: todo.id, isEdit: true });
+        }}
+      >
         <span className="task-item-body-text">{todo.title}</span>
+        <input className="task-item-body-input" value={todo.title} />
       </div>
       <div className="task-item-action icon">
         <button className="btn-reset btn-destroy"></button>
