@@ -31,21 +31,6 @@ export const login = async (data) => {
   return res.json();
 };
 
-export const checkTokenExpired = async (authToken) => {
-  try {
-    const res = await fetch(`${authURL}/test-token`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + authToken,
-      },
-    });
-    return res.json();
-  } catch (error) {
-    return error;
-  }
-};
-
 export const logout = () => {
   localStorage.removeItem('authToken');
 };

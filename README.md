@@ -331,6 +331,15 @@ context 內部封裝了登入狀態，以及 登入 / 登出 / 註冊的方法
 ---
 
 26. fix: avoid using localstorage in useEffect dependency
+    到目前為止，我們的功能皆已完成，但是眼尖的同學應該可以發現，console 出現了 warning
+
+    ```
+    Line 37:7:  React Hook useEffect has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+
+    ```
+
+    這個是因為 我們將 local storage.getItem() 作為 useEffect dependency
+    這邊我們可以透過監聽 window storage 這個 event，來確認 local storage 的變化
 
 ---
 

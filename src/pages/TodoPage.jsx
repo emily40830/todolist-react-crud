@@ -124,7 +124,7 @@ const TodoPage = () => {
 
   return (
     <div>
-      <Header username={currentMember.name} />
+      <Header username={currentMember?.name} />
       <TodoInput
         inputValue={inputValue}
         onChange={handleChange}

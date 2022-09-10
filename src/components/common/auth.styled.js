@@ -14,7 +14,7 @@ const StyledAuthInputContainer = styled.div`
   margin-top: 30px;
 `;
 
-const StyledButton = styled.div`
+const StyledButton = styled.button`
   border-radius: 30px;
   background-color: #ff6600;
   border: none;

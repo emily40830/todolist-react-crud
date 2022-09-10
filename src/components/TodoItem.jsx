@@ -19,7 +19,18 @@ const StyledTaskItem = styled.div`
   flex-wrap: wrap;
 
   .task-item-body-input {
+    user-select: none;
     display: none;
+    flex: 1;
+    padding: 8px 0px;
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+
+    &::placeholder {
+      color: var(--gray);
+      font-size: 13px;
+    }
   }
 
   &:hover {
@@ -133,9 +144,9 @@ const TodoItem = ({ todo, onSave, onDelete, onToggleDone, onChangeMode }) => {
           onKeyDown={handleKeyDown}
         />
       </div>
-      <div className="task-item-action icon">
+      <div className="task-item-action ">
         <button
-          className="btn-reset btn-destroy"
+          className="btn-reset btn-destroy icon"
           onClick={onDelete?.(todo.id)}
         ></button>
       </div>

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { login, register, checkTokenExpired } from '../api/auth';
+import { login, register } from '../api/auth';
 const defaultAuthContext = {
   isAuthenticated: false,
   authToken: null,
@@ -14,27 +14,24 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthContext = createContext(defaultAuthContext);
 export const AuthProvider = ({ children }) => {
-  const [authToken, setAuthToken] = useState(null);
+  const [authToken, setAuthToken] = useState(() => {
+    const token = localStorage.getItem('authToken');
+    return token ?? null;
+  });
+
   const [payload, setPayload] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
+    if (!authToken) {
       setPayload(null);
-      setAuthToken(null);
-      return;
     }
-    try {
-      const tmpPayload = jwt.decode(token);
-      if (!tmpPayload) {
-        return;
-      }
-      setAuthToken(token);
-      setPayload(tmpPayload);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [localStorage.getItem('authToken')]);
+
+    const tmpPayload = jwt.decode(authToken);
+    console.log('tmp', tmpPayload);
+    setPayload(tmpPayload);
+  }, [authToken]);
+
+  console.log('auth', authToken);
 
   return (
     <AuthContext.Provider
@@ -56,7 +53,6 @@ export const AuthProvider = ({ children }) => {
               setAuthToken(authToken);
             })
             .catch((error) => {
-              setAuthToken(null);
               console.error(error);
             });
         },
@@ -67,9 +63,9 @@ export const AuthProvider = ({ children }) => {
           })
             .then((res) => {
               localStorage.setItem('authToken', res.authToken);
+              setAuthToken(res.authToken);
             })
             .catch((error) => {
-              setAuthToken(null);
               console.error(error);
             });
         },
