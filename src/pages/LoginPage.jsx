@@ -5,6 +5,7 @@ import {
   AuthButton,
   AuthLinkText,
 } from 'components/common/auth.styled';
+import { Navigate } from 'react-router-dom';
 import { ACLogoIcon } from 'assets/images';
 import AuthInput from 'components/AuthInput';
 import { Link } from 'react-router-dom';
@@ -14,7 +15,11 @@ const LoginPage = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return <Navigate to="/todos" replace />;
+  }
 
   const handleSubmit = () => {
     login({ username: userName, password });

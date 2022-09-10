@@ -322,3 +322,7 @@ context 內部封裝了登入狀態，以及 登入 / 登出 / 註冊的方法
 
 24. feat: add auth context to page
     透過 context 掛載在 各個頁面，以 isAuthenticated 切換頁面狀態
+
+---
+
+25. feat: logout and username at todo page
