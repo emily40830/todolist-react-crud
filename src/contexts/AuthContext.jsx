@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     try {
-      const tmpPayload = jwt.decode(authToken);
+      const tmpPayload = jwt.decode(token);
       if (!tmpPayload) {
         return;
       }

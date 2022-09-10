@@ -179,6 +179,8 @@ Input 的部分我們會將當前輸入的值帶入，也會需要監聽數值�
 
 ```
 
+---
+
 14. feat: implement update todo title at todo page and collection
 
 接下來我們來加上 save 的功能吧！
@@ -187,8 +189,12 @@ Input 的部分我們會將當前輸入的值帶入，也會需要監聽數值�
 (補充說明 control vs uncontrolled 的寫法)
 當不確定如何使用時，記住一個觀念：不要把 props 當成初始狀態
 
+---
+
 15. feat: implement delete
     (學生自己做)
+
+---
 
 16. feat: add json server
     目前為止，我們已經完成 todolist 的所有功能，接下來串接要來實際模擬與後端拿取資料的更新操作
@@ -220,10 +226,15 @@ npm install json-server
     要實作的功能有底下四個，可以先想像一下，當畫面 render 出 todo list 的時候，應該是要發起請求向後端拿取資料
     因此，在這邊我們在 todo page 新增 useEffect 來獲得資料，並更新 todo 狀態
 
+---
+
 16. feat: add create todo from api
     透過 api 新增 todo ，可以從 後端拿到 todo 的 id，就可以把當前的 math.random 拿掉
     這邊我們修改了 setTodos 的方法，改成 傳入 callback function 的方法，以確保當下依賴的 prev state 是正確的
     (demo 新增，並觀察 json-server console)
+
+---
+
 17. feat: add update todo from api
 
 在這裡會更動兩個 handler ，更動的時候，我們實際上是回傳一個 function 出去，因此在子元件要修改成底下的寫法，才會觸發到是正確的 handler
@@ -241,6 +252,8 @@ TodoItem.jsx
         <span className="icon icon-checked" onClick={onToggleDone?.(todo.id)} />
       </div>
 ```
+
+---
 
 18. feat: delete todo from api
     delete 的做法與 update 大同小異
@@ -260,6 +273,8 @@ Username: iamuser1
 Email: admin@alpha.co
 Password: pass1234
 
+---
+
 20. feat: implement login page and signup page
     現在我們來切登入與註冊頁，這兩個頁面的結構是一模一樣的，只有註冊頁多了一個註冊的 input 欄位
     因此我們可以把兩個頁面共用的元件都拆到 common 的 folder 過去
@@ -269,12 +284,16 @@ Password: pass1234
     這邊會用到 react router dom 的 Link element 來實作連結
     頁面的佈局就到這邊完成，接下來會來實作 authinput 的部分
 
+---
+
 21. feat: implement auth input and page state
 
 這邊我們將 auth input 的樣式處理好後，也為 兩頁 page 加上對應的 props
 login 會新增兩個 state :username and password 做存取
 signup 會新增三個 state :username email, and password 做存取
 同時也透過 onChange 來 setState
+
+---
 
 22. feat: add auth context
     在先前 todo crud 的實作中，我們可以發現使用 useState 管理元件內部的狀態時，為了讓子元件可以讀取到父層的狀態值，會透過 props 傳遞。
@@ -291,3 +310,15 @@ context 內部封裝了登入狀態，以及 登入 / 登出 / 註冊的方法
 登入 與 註冊 成功後 會拿到 authToken，我們將這個 token 放到 localStorage
 再透過 localStorage 中的 authToken 作為 dependency
 進而觸發更改 isAuthenticated
+
+---
+
+23. feat: add register and login handler
+    先前我們實作了 login 和 register 的 function 在 context 後，我們可以在 app 層引用 AuthProvider
+    就可以讓整個 app 底下的所有元件使用這個 context 所實作的功能與狀態
+    接著，我們在登入頁與註冊頁引用 useAuth，拿到需要的 function 實作登入與註冊
+
+---
+
+24. feat: add auth context to page
+    透過 context 掛載在 各個頁面，以 isAuthenticated 切換頁面狀態

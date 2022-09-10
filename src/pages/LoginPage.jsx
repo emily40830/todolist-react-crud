@@ -8,10 +8,17 @@ import {
 import { ACLogoIcon } from 'assets/images';
 import AuthInput from 'components/AuthInput';
 import { Link } from 'react-router-dom';
+import { useAuth } from 'contexts/AuthContext';
 
 const LoginPage = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+
+  const { login } = useAuth();
+
+  const handleSubmit = () => {
+    login({ username: userName, password });
+  };
 
   return (
     <AuthContainer>
@@ -39,7 +46,7 @@ const LoginPage = () => {
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </AuthInputContainer>
-      <AuthButton>登入</AuthButton>
+      <AuthButton onClick={handleSubmit}>登入</AuthButton>
       <Link to="/register">
         <AuthLinkText>註冊</AuthLinkText>
       </Link>
