@@ -2,21 +2,18 @@ import jwt from 'jsonwebtoken';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { login, register, checkTokenExpired } from '../api/auth';
 const defaultAuthContext = {
-  isAuthenticating: false,
   isAuthenticated: false,
   authToken: null,
   currentMember: null,
   register: null,
   login: null,
   logout: null,
-  checkAuth: null,
 };
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthContext = createContext(defaultAuthContext);
 export const AuthProvider = ({ children }) => {
-  const [loading, setLoading] = useState(defaultAuthContext.isAuthenticating);
   const [authToken, setAuthToken] = useState(null);
   const [payload, setPayload] = useState(null);
 
@@ -42,15 +39,13 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticating: loading,
         isAuthenticated: Boolean(authToken),
         authToken,
         currentMember: payload && {
           id: payload.sub,
           name: payload.name,
         },
-        register: async (data) => {
-          setLoading(true);
+        register: (data) => {
           register({
             email: data.email,
             username: data.username,
@@ -63,13 +58,9 @@ export const AuthProvider = ({ children }) => {
             .catch((error) => {
               setAuthToken(null);
               console.error(error);
-            })
-            .finally(() => {
-              setLoading(false);
             });
         },
-        login: async (data) => {
-          setLoading(true);
+        login: (data) => {
           login({
             username: data.username,
             password: data.password,
@@ -80,21 +71,11 @@ export const AuthProvider = ({ children }) => {
             .catch((error) => {
               setAuthToken(null);
               console.error(error);
-            })
-            .finally(() => {
-              setLoading(false);
             });
         },
-        logout: async () => {
+        logout: () => {
           localStorage.clear();
           setAuthToken(null);
-        },
-        checkAuth: async () => {
-          checkTokenExpired(authToken)
-            .then((res) => {
-              console.log('checkTokenExpired', res);
-            })
-            .catch((error) => console.error(error));
         },
       }}
     >

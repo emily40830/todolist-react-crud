@@ -326,3 +326,16 @@ context 內部封裝了登入狀態，以及 登入 / 登出 / 註冊的方法
 ---
 
 25. feat: logout and username at todo page
+    在 footer 加上 logout 功能
+
+---
+
+26. fix: avoid using localstorage in useEffect dependency
+
+---
+
+27. fix: replace clsx with styled-component props
+
+---
+
+28. refactor: use axios
