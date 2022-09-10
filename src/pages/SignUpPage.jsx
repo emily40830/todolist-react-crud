@@ -34,30 +34,30 @@ const SignUpPage = () => {
 
       <AuthInputContainer>
         <AuthInput
-          title={'username'}
-          label={'帳號'}
+          title="username"
+          label="帳號"
           value={userName}
-          placeholder={'請輸入帳號'}
+          placeholder="請輸入帳號"
           onChange={(nameInputValue) => setUserName(nameInputValue)}
         />
       </AuthInputContainer>
 
       <AuthInputContainer>
         <AuthInput
-          label={'Email'}
-          title={'email'}
+          label="Email"
+          title="email"
           value={email}
-          placeholder={'請輸入email'}
+          placeholder="請輸入email"
           onChange={(emailInputValue) => setEmail(emailInputValue)}
         />
       </AuthInputContainer>
 
       <AuthInputContainer>
         <AuthInput
-          type={'password'}
-          label={'密碼'}
+          type="password"
+          label="密碼"
           value={password}
-          placeholder={'請輸入密碼'}
+          placeholder="請輸入密碼"
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </AuthInputContainer>

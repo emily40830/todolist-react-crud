@@ -1,34 +1,24 @@
+import axios from 'axios';
+
 const authURL = 'https://webdev.alphacamp.io/api/auth';
 
 export const register = async ({ username, email, password }) => {
-  const res = await fetch(`${authURL}/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-    }),
+  const { data } = await axios.post(`${authURL}/register`, {
+    username,
+    email,
+    password,
   });
 
-  return res.json();
+  return data;
 };
 
 export const login = async (data) => {
-  const res = await fetch(`${authURL}/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username: data.username,
-      password: data.password,
-    }),
+  const res = await axios.post(`${authURL}/login`, {
+    username: data.username,
+    password: data.password,
   });
 
-  return res.json();
+  return res.data;
 };
 
 export const logout = () => {
