@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { checkPermission, login, register } from '../api/auth';
+import { checkPermission, login, logout, register } from '../api/auth';
 const defaultAuthContext = {
   isAuthenticated: false,
   authToken: null,
@@ -9,7 +9,6 @@ const defaultAuthContext = {
   register: null,
   login: null,
   logout: null,
-  checkPermission: null,
 };
 
 export const useAuth = () => useContext(AuthContext);
@@ -42,8 +41,16 @@ export const AuthProvider = ({ children }) => {
   }, [authToken]);
 
   useEffect(() => {
-    checkPermission(authToken);
-  }, [pathname, authToken]);
+    const currentToken = localStorage.getItem('authToken');
+    checkPermission(currentToken)
+      .then((isSuccess) => {
+        setIsAuthenticated(isSuccess);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsAuthenticated(false);
+      });
+  }, [pathname]);
 
   return (
     <AuthContext.Provider
@@ -82,19 +89,8 @@ export const AuthProvider = ({ children }) => {
             });
         },
         logout: () => {
-          localStorage.clear();
+          logout();
           setAuthToken(null);
-        },
-        checkPermission: () => {
-          const currentToken = localStorage.getItem('authToken');
-          checkPermission(currentToken)
-            .then((isSuccess) => {
-              setIsAuthenticated(isSuccess);
-            })
-            .catch((error) => {
-              console.error(error);
-              setIsAuthenticated(false);
-            });
         },
       }}
     >
