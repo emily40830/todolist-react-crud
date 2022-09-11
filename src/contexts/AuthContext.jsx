@@ -42,10 +42,8 @@ export const AuthProvider = ({ children }) => {
   }, [authToken]);
 
   useEffect(() => {
-    const currentToken = localStorage.getItem('authToken');
-    console.log('pathname', pathname);
-    checkPermission(currentToken);
-  }, [pathname]);
+    checkPermission(authToken);
+  }, [pathname, authToken]);
 
   return (
     <AuthContext.Provider
@@ -95,6 +93,7 @@ export const AuthProvider = ({ children }) => {
             })
             .catch((error) => {
               console.error(error);
+              setIsAuthenticated(false);
             });
         },
       }}
