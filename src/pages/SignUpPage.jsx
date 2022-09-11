@@ -22,6 +22,7 @@ const SignUpPage = () => {
   }
 
   const handleSubmit = () => {
+    console.log('handleSubmit');
     register({ email, username: userName, password });
   };
 
@@ -61,7 +62,7 @@ const SignUpPage = () => {
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </AuthInputContainer>
-      <AuthButton onSubmit={handleSubmit}>註冊</AuthButton>
+      <AuthButton onClick={handleSubmit}>註冊</AuthButton>
       <Link to="/login">
         <AuthLinkText>取消</AuthLinkText>
       </Link>
