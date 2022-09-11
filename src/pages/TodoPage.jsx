@@ -110,6 +110,7 @@ const TodoPage = () => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
+  useEffect(() => {}, []);
   useEffect(() => {
     getTodos()
       .then((todos) => {
@@ -138,7 +139,7 @@ const TodoPage = () => {
         onSave={handleSave}
         onDelete={handleDelete}
       />
-      <Footer numOfTodos={todos.length} on />
+      <Footer numOfTodos={todos.length} />
     </div>
   );
 };

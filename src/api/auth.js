@@ -21,6 +21,20 @@ export const login = async (data) => {
   return res.data;
 };
 
+export const checkPermission = async (authToken) => {
+  try {
+    const res = await axios.get(`${authURL}/test-token`, {
+      headers: {
+        Authorization: 'Bearer ' + authToken,
+      },
+    });
+
+    return res.data.success;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const logout = () => {
   localStorage.removeItem('authToken');
 };

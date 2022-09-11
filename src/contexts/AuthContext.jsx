@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { login, register } from '../api/auth';
+import { useLocation } from 'react-router-dom';
+import { checkPermission, login, register } from '../api/auth';
 const defaultAuthContext = {
   isAuthenticated: false,
   authToken: null,
@@ -8,35 +9,48 @@ const defaultAuthContext = {
   register: null,
   login: null,
   logout: null,
+  checkPermission: null,
 };
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthContext = createContext(defaultAuthContext);
 export const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const [authToken, setAuthToken] = useState(() => {
     const token = localStorage.getItem('authToken');
     return token ?? null;
   });
-
   const [payload, setPayload] = useState(null);
+
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (!authToken) {
       setPayload(null);
+      setIsAuthenticated(false);
     }
-
     const tmpPayload = jwt.decode(authToken);
-    console.log('tmp', tmpPayload);
-    setPayload(tmpPayload);
+    if (tmpPayload) {
+      setPayload(tmpPayload);
+      setIsAuthenticated(true);
+    } else {
+      setPayload(null);
+      setIsAuthenticated(false);
+    }
   }, [authToken]);
 
-  console.log('auth', authToken);
+  useEffect(() => {
+    const currentToken = localStorage.getItem('authToken');
+    console.log('pathname', pathname);
+    checkPermission(currentToken);
+  }, [pathname]);
 
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated: Boolean(authToken),
+        isAuthenticated,
         authToken,
         currentMember: payload && {
           id: payload.sub,
@@ -72,6 +86,16 @@ export const AuthProvider = ({ children }) => {
         logout: () => {
           localStorage.clear();
           setAuthToken(null);
+        },
+        checkPermission: () => {
+          const currentToken = localStorage.getItem('authToken');
+          checkPermission(currentToken)
+            .then((isSuccess) => {
+              setIsAuthenticated(isSuccess);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
         },
       }}
     >

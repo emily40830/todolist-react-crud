@@ -5,18 +5,18 @@ import { AuthProvider } from 'contexts/AuthContext';
 
 function App() {
   return (
-    <AuthProvider>
-      <div className="app">
-        <BrowserRouter>
+    <div className="app">
+      <BrowserRouter>
+        <AuthProvider>
           <Routes>
             <Route path="todos" element={<TodoPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<SignUpPage />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
-        </BrowserRouter>
-      </div>
-    </AuthProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </div>
   );
 }
 
