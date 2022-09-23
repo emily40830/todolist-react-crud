@@ -1,5 +1,5 @@
 import { Footer, Header, TodoCollection, TodoInput } from 'components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { useAuth } from 'contexts/AuthContext';
@@ -61,8 +61,6 @@ const TodoPage = () => {
   };
 
   const handleToggleTodoItem = (id) => async () => {
-    const currentTodo = todos.find((todo) => todo.id === id);
-
     setTodos((prevTodos) => {
       return prevTodos.map((todo) => {
         if (todo.id === id) {
