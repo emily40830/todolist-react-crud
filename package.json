@@ -1,7 +1,7 @@
 {
   "name": "todolist-react-dev",
   "version": "0.1.0",
-  "homepage": "https://emily40830.github.io/todolist-react-dev",
+  "homepage": "https://emily40830.github.io/todolist-react-crud",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

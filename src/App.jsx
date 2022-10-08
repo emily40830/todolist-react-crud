@@ -10,8 +10,8 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path="todos" element={<TodoPage />} />
+            <Route path="signup" element={<SignUpPage />} />
             <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<SignUpPage />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
         </AuthProvider>

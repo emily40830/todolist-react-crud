@@ -62,14 +62,16 @@ export const AuthProvider = ({ children }) => {
           name: payload.name,
         },
         register: (data) => {
+          console.log('register', data);
           register({
             email: data.email,
             username: data.username,
             password: data.password,
           })
-            .then(({ authToken }) => {
-              localStorage.setItem('authToken', authToken);
-              setAuthToken(authToken);
+            .then((res) => {
+              console.log(res);
+              localStorage.setItem('authToken', res.authToken);
+              setAuthToken(res.authToken);
             })
             .catch((error) => {
               console.error(error);
