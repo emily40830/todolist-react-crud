@@ -6,7 +6,7 @@ import { AuthProvider } from 'contexts/AuthContext';
 function App() {
   return (
     <div className="app">
-      <HashRouter>
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <AuthProvider>
           <Routes>
             <Route path="todos" element={<TodoPage />} />

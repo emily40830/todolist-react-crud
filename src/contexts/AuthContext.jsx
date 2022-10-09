@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const currentToken = localStorage.getItem('authToken');
+    console.log(pathname);
     if (pathname === 'todos') {
       checkPermission(currentToken)
         .then((isSuccess) => {
