@@ -42,14 +42,16 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const currentToken = localStorage.getItem('authToken');
-    checkPermission(currentToken)
-      .then((isSuccess) => {
-        setIsAuthenticated(isSuccess);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsAuthenticated(false);
-      });
+    if (pathname === 'todos') {
+      checkPermission(currentToken)
+        .then((isSuccess) => {
+          setIsAuthenticated(isSuccess);
+        })
+        .catch((error) => {
+          console.error(error);
+          setIsAuthenticated(false);
+        });
+    }
   }, [pathname]);
 
   return (
