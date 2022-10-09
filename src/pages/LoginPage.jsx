@@ -52,7 +52,7 @@ const LoginPage = () => {
         />
       </AuthInputContainer>
       <AuthButton onClick={handleSubmit}>登入</AuthButton>
-      <Link to="/register">
+      <Link to="/signup">
         <AuthLinkText>註冊</AuthLinkText>
       </Link>
     </AuthContainer>
