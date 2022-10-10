@@ -53,7 +53,7 @@ const LoginPage = () => {
       </AuthInputContainer>
       <AuthButton onClick={handleSubmit}>登入</AuthButton>
       <Link to="/signup">
-        <AuthLinkText>註冊</AuthLinkText>
+        <AuthLinkText>註冊 -2</AuthLinkText>
       </Link>
     </AuthContainer>
   );
