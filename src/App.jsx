@@ -1,5 +1,5 @@
 import { HomePage, LoginPage, SignUpPage, TodoPage } from 'pages';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { AuthProvider } from 'contexts/AuthContext';
 
@@ -9,7 +9,7 @@ function App() {
     process.env.NODE_ENV === 'development' ? '/' : process.env.PUBLIC_URL;
 
   return (
-    <BrowserRouter basename={basename}>
+    <HashRouter basename={basename}>
       <div className="app">
         <AuthProvider>
           <Routes>
@@ -20,7 +20,7 @@ function App() {
           </Routes>
         </AuthProvider>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
