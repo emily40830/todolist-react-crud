@@ -9,8 +9,8 @@ function App() {
     process.env.NODE_ENV === 'development' ? '/' : process.env.PUBLIC_URL;
 
   return (
-    <div className="app">
-      <BrowserRouter basename={basename}>
+    <BrowserRouter basename={basename}>
+      <div className="app">
         <AuthProvider>
           <Routes>
             <Route path="todos" element={<TodoPage />} />
@@ -19,8 +19,8 @@ function App() {
             <Route path="*" element={<HomePage />} />
           </Routes>
         </AuthProvider>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
